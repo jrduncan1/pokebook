@@ -20,12 +20,14 @@
 					<th>Expense</th>
 					<th>Vendor</th>
 					<th>Amount</th>
+					<th>Actions</th>
 				</tr>
 				<c:forEach var="expense" items="${expenses}">
 					<tr>
 						<td>${expense.expenseName}</td>
 						<td>${expense.vendor}</td>
 						<td><fmt:formatNumber value="${expense.amount}" type="currency" /></td>
+						<td><a href="/edit/<c:out value="${expense.id}"></c:out>"><button class="btn btn-secondary">Edit</button></a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -34,29 +36,30 @@
 			<h3 class="mb-5">Track an Expense:</h3>
 			<form:form action="/" method="post" modelAttribute="newExpense" class="form">
 				<div class="row mb-2">
-					<form:label path="expenseName" class="col-sm-2 col-form-label">Expense Name: </form:label>
 					<form:errors path="expenseName" class="text-danger" />
+					<form:label path="expenseName" class="col-sm-2 col-form-label">Expense Name: </form:label>
 					<div class="col-sm-4">
 						<form:input path="expenseName" type="text" class="form-control"/>
 					</div>
 				</div>
 				<div class="row mb-2">
-					<form:label path="vendor" class="col-sm-2 col-form-label">Vendor: </form:label>
 					<form:errors path="vendor" class="text-danger" />
+					<form:label path="vendor" class="col-sm-2 col-form-label">Vendor: </form:label>
 					<div class="col-sm-4">
 						<form:input path="vendor" type="text" class="form-control"/>
 					</div>
 				</div>
 				<div class="row mb-2">
-					<form:label path="amount" class="col-sm-2 col-form-label">Amount: </form:label>
 					<form:errors path="amount" class="text-danger" />
+					<form:label path="amount" class="col-sm-2 col-form-label">Amount: </form:label>
 					<div class="col-sm-4">
 						<form:input path="amount" type="number" step="0.01" class="form-control"/>
 					</div>
 				</div>
 				<div class="row mb-2">
-					<form:label path="description" class="col-sm-2 col-form-label">Description: </form:label>
 					<form:errors path="description" class="text-danger" />
+					<form:label path="description" class="col-sm-2 col-form-label">Description: </form:label>
+					
 					<div class="col-sm-4">
 						<form:textarea path="description" type="text" class="form-control"></form:textarea>
 					</div>

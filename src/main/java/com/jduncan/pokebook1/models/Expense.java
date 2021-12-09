@@ -33,7 +33,7 @@ public class Expense {
 	private String vendor;
 	
 	@NotNull
-	@Min(value = 1, message="Amount must be at least $1.")
+	@Min(value = 1, message="Amount must be entered.")
 	private Double amount;
 	
 	@NotNull

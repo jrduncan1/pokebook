@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.jduncan.pokebook1.models.Expense;
 import com.jduncan.pokebook1.services.ExpenseService;
@@ -34,10 +36,18 @@ public class MainController {
 		return "dashboard.jsp";
 	}
 	
+	// Get for edit form
+	@GetMapping("/edit/{id}")
+	public String showOneExpense(@PathVariable("id") Long id, Model model) {
+		Expense expense = expenseService.showOneExpense(id);
+		model.addAttribute("expense", expense);
+		return "editExpense.jsp";
+	}
+	
 	// ****** ACTION ROUTES ******
 
 	// CREATE
-	// Post for handling creation of new expense, and validations
+	// Processes creation of new expense, and validations
 	@PostMapping("/")
 	public String processCreateExpense(@Valid @ModelAttribute("newExpense") Expense newExpense,
 			BindingResult result,
@@ -51,5 +61,19 @@ public class MainController {
 			return "redirect:/";
 		}
 	}
+	
+	// UPDATE
+	// Processes editing of form
+	@PutMapping("/edit/{id}")
+	public String processUpdateExpense(@Valid @ModelAttribute("expense") Expense expense, BindingResult result, @PathVariable("id") Long id) {
+		if(result.hasErrors()) {
+			return "editExpense.jsp";
+		} else {
+			expenseService.editExpense(expense);
+			return "redirect:/";
+		}
+	}
+	
+	
 	
 }
