@@ -24,10 +24,21 @@
 				</tr>
 				<c:forEach var="expense" items="${expenses}">
 					<tr>
-						<td>${expense.expenseName}</td>
+						<td><a href="/expense/${expense.id}">${expense.expenseName}</a></td>
 						<td>${expense.vendor}</td>
 						<td><fmt:formatNumber value="${expense.amount}" type="currency" /></td>
-						<td><a href="/edit/<c:out value="${expense.id}"></c:out>"><button class="btn btn-secondary">Edit</button></a></td>
+						<td>
+							<div class="d-flex">
+								<a href="/edit/<c:out value="${expense.id}"></c:out>"><button class="btn btn-secondary me-3">Edit</button></a>
+								<form action="/delete/${expense.id}" method="post">
+									<input type="hidden" name="_method" value="delete">
+									<input type="submit" value="Delete" class="btn btn-danger">
+								</form>
+							</div>
+						</td>
+
+						
+						
 					</tr>
 				</c:forEach>
 			</table>

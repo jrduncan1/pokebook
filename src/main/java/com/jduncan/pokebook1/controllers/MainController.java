@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,10 +39,18 @@ public class MainController {
 	
 	// Get for edit form
 	@GetMapping("/edit/{id}")
-	public String showOneExpense(@PathVariable("id") Long id, Model model) {
+	public String editOneExpense(@PathVariable("id") Long id, Model model) {
 		Expense expense = expenseService.showOneExpense(id);
 		model.addAttribute("expense", expense);
 		return "editExpense.jsp";
+	}
+	
+	// Get for show one expense's info
+	@GetMapping("/expense/{id}")
+	public String showOneExpense(@PathVariable("id") Long id, Model model) {
+		Expense expense = expenseService.showOneExpense(id);
+		model.addAttribute("expense", expense);
+		return "showOne.jsp";
 	}
 	
 	// ****** ACTION ROUTES ******
@@ -63,7 +72,7 @@ public class MainController {
 	}
 	
 	// UPDATE
-	// Processes editing of form
+	// Processes editing of expense
 	@PutMapping("/edit/{id}")
 	public String processUpdateExpense(@Valid @ModelAttribute("expense") Expense expense, BindingResult result, @PathVariable("id") Long id) {
 		if(result.hasErrors()) {
@@ -74,6 +83,13 @@ public class MainController {
 		}
 	}
 	
+	// DELETE
+	// Processes deleting expense
+	@DeleteMapping("/delete/{id}")
+	public String processDeleteExpense(@PathVariable("id") Long id) {
+		expenseService.deleteExpense(id);
+		return "redirect:/";
+	}
 	
 	
 }
