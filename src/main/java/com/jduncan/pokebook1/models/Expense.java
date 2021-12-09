@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,8 +31,7 @@ public class Expense {
 	@Size(min=1, max=100, message="Vendor is a required field.")
 	private String vendor;
 	
-	@NotNull
-	@Min(value = 1, message="Amount must be entered.")
+	@NotNull(message="Amount must be entered.")
 	private Double amount;
 	
 	@NotNull

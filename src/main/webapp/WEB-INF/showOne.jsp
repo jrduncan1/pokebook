@@ -17,7 +17,7 @@
 			<h1>Expense Details</h1>
 			<a href="/"><button class="btn btn-warning">Dashboard</button></a>
 		</div>
-		<div class="mt-5 col-6">
+		<div class="mt-5 col-4">
 			<table class="table table-borderless">
 				<tr>
 					<td>Expense Name:</td>
